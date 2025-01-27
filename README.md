@@ -19,3 +19,12 @@ Status: Downloaded newer image for python:3.12.8
 root@b54bec9a0c22:/# pip --version
 pip 24.3.1 from /usr/local/lib/python3.12/site-packages/pip (python 3.12)
 
+
+## Question 5. Three biggest pickup zones
+select z."Zone", cast(gt.lpep_pickup_datetime as date) as pu_date, sum(gt.total_amount) as sum_amount
+from zones as z
+join green_trips as gt
+on gt."PULocationID" = z."LocationID"
+where cast(gt.lpep_pickup_datetime as date) ='2019-10-18'
+group by 1,2
+having sum(gt.total_amount)>13000
