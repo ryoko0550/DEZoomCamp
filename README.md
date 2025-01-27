@@ -19,6 +19,10 @@ Status: Downloaded newer image for python:3.12.8
 root@b54bec9a0c22:/# pip --version
 pip 24.3.1 from /usr/local/lib/python3.12/site-packages/pip (python 3.12)
 
+## Question 4. Longest trip for each day
+select cast(lpep_pickup_datetime as date), trip_distance from green_trips as gt
+order by trip_distance desc
+limit 1
 
 ## Question 5. Three biggest pickup zones
 select z."Zone", cast(gt.lpep_pickup_datetime as date) as pu_date, sum(gt.total_amount) as sum_amount
