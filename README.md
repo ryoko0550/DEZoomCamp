@@ -28,3 +28,17 @@ on gt."PULocationID" = z."LocationID"
 where cast(gt.lpep_pickup_datetime as date) ='2019-10-18'
 group by 1,2
 having sum(gt.total_amount)>13000
+
+
+## Question 6. Largest tip
+select "Zone"
+from zones
+where "LocationID" in (
+select gt."DOLocationID"
+from zones as z
+join green_trips as gt
+on z."LocationID" = gt."PULocationID"
+where to_char(gt.lpep_pickup_datetime, 'YYYY-MM')='2019-10'
+and z."Zone"='East Harlem North'
+order by tip_amount desc
+limit 1)
